@@ -204,7 +204,6 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
         if (isOffRoute != null) {
           if (isOffRoute) {
             showRerouteState();
-            instructionListAdapter.clear();
           } else if (isRerouting) {
             hideRerouteState();
             showAlertView();
@@ -907,6 +906,8 @@ public class InstructionView extends RelativeLayout implements FeedbackBottomShe
    * @param model to provide the current steps and unit type
    */
   private void updateInstructionList(InstructionModel model) {
-    instructionListAdapter.updateSteps(getContext(), model.getProgress(), language, unitType);
+    RouteProgress routeProgress = model.getProgress();
+    instructionListAdapter.updateBannerListWith(routeProgress);
+    instructionListAdapter.updateBannerFormat(getContext(), language, unitType);
   }
 }
