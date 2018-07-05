@@ -133,7 +133,12 @@ public class NavigationView extends CoordinatorLayout implements LifecycleObserv
     }
     outState.putBoolean(getContext().getString(R.string.recenter_btn_visible),
       recenterBtn.getVisibility() == View.VISIBLE);
+
+    outState.putInt(getContext().getString(R.string.camera_state),
+      navigationPresenter.getCameraState());
+
     outState.putBoolean(getContext().getString(R.string.navigation_running), navigationViewModel.isRunning());
+
     outState.putBoolean(getContext().getString(R.string.instruction_view_visible),
       instructionView.isShowingInstructionList());
     mapView.onSaveInstanceState(outState);
@@ -149,11 +154,17 @@ public class NavigationView extends CoordinatorLayout implements LifecycleObserv
   public void onRestoreInstanceState(Bundle savedInstanceState) {
     boolean isVisible = savedInstanceState.getBoolean(getContext().getString(R.string.recenter_btn_visible));
     recenterBtn.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+
     int bottomSheetState = savedInstanceState.getInt(getContext().getString(R.string.bottom_sheet_state));
     resetBottomSheetState(bottomSheetState);
+
     boolean instructionViewVisible = savedInstanceState.getBoolean(getContext().getString(
       R.string.instruction_view_visible));
     updateInstructionListState(instructionViewVisible);
+
+    int cameraState = savedInstanceState.getInt(getContext().getString(R.string.camera_state));
+    navigationPresenter.resetState(cameraState);
+
   }
 
   /**

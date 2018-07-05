@@ -58,6 +58,8 @@
             translatable="false">dark_theme_enabled</string>
     <string name="recenter_btn_visible"
             translatable="false">recenter_btn_visible</string>
+    <string name="camera_state"
+        translatable="false">camera_state</string>
     <string name="bottom_sheet_state"
             translatable="false">bottom_sheet_state</string>
     <string name="navigation_running"
